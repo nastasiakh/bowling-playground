@@ -1,0 +1,14 @@
+<div class="container">
+  <div>
+    <input type="email" [formControl]="emailField"
+           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
+    <input type="password" [formControl]="passwordField"
+           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
+  </div>
+  <div>
+    <button style="display: block; margin-bottom: 15px; width: 150px" (click)="logIn()">Log in</button>
+  </div>
+  <div>
+    <button style="display: block; margin-bottom: 15px; width: 150px">Create account</button>
+  </div>
+</div>

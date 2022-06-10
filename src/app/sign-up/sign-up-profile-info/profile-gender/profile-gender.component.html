@@ -1,0 +1,16 @@
+<div class="container">
+  <div>
+    <div style="margin-bottom: 15px;" >
+      <input type="radio" name="gender-radio" id="female" value="female" [(ngModel)]="genderValue"/>
+      <label for="female">Female</label>
+    </div>
+    <div style="margin-bottom: 15px;" >
+      <input type="radio" id="male" name="gender-radio" value="male" [(ngModel)]="genderValue"/>
+      <label for="male">Male</label>
+    </div>
+  </div>
+  <div>
+    <button routerLink="/signup/bday" (click)="addProfileInfo()" [disabled]="!genderValue"
+      style="display: block; margin-bottom: 15px; width: 150px">Next</button>
+  </div>
+</div>
