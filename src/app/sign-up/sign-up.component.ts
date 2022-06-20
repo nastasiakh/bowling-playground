@@ -10,8 +10,8 @@ import {signUpWithEmail} from "../stores/actions/auth.actions";
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-  email = new FormControl('',[Validators.required, Validators.email])
-  password = new FormControl('',[Validators.required, Validators.minLength(6)])
+  emailField = new FormControl('',[Validators.required, Validators.email])
+  passwordField = new FormControl('',[Validators.required, Validators.minLength(6)])
 
 
   constructor(private router: Router, private store: Store ) {
@@ -21,16 +21,16 @@ export class SignUpComponent {
   ngOnInit(): void {
   }
 
-  addProfileInfo(){
-    if(this.email.valid){
+  signUpWithEmail(){
+    if(this.emailField.valid){
       this.store.dispatch(signUpWithEmail({
         profile: {
-          email: this.email.value,
-          password: this.password.value,
-          id: String(new Date().getDate())
+          email: this.emailField.value,
+          password: this.passwordField.value,
+          id: String(new Date().getMilliseconds())
         }
       }))
+      this.router.navigate(['signup', 'info'])
     }
-    this.router.navigate(['signup', 'gender'])
   }
 }

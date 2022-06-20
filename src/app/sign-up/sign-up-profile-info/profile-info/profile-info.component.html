@@ -1,0 +1,59 @@
+<div class="container">
+  <div>
+    <div *ngIf="step === 1">
+      <div style="margin-bottom: 15px;" >
+        <input type="radio" name="gender-radio" id="female" value="female" [(ngModel)]="genderValue"/>
+        <label for="female">Female</label>
+      </div>
+      <div style="margin-bottom: 15px;" >
+        <input type="radio" id="male" name="gender-radio" value="male" [(ngModel)]="genderValue"/>
+        <label for="male">Male</label>
+      </div>
+      <div>
+        <button (click)="changeStep(2)"  [disabled]="!genderValue"
+                style="display: block; margin-bottom: 15px; width: 150px">Next</button>
+      </div>
+    </div>
+    <div *ngIf="step === 2">
+      <div style="margin-bottom: 15px;" >
+
+        <select style="display: inline-block; min-width: 70px; margin-right: 15px;"
+                [(ngModel)] = birthDay>
+          <option style="color: black; font-size: 14px" [value]="day" ngDefaultControl
+                  *ngFor="let day of days">{{day}}</option>
+        </select>
+
+        <select style="display: inline-block; min-width: 70px; margin-right: 15px;"
+                [(ngModel)]="birthMonth">
+          <option [value]="i" *ngFor="let month of months; index as i" ngDefaultControl
+                  style="color: black; font-size: 14px">{{month}}</option>
+        </select>
+
+        <select style="display: inline-block; min-width: 70px; margin-right: 15px;"
+                [(ngModel)]="birthYear">
+            <option *ngFor="let year of yearOptions" style="color: black; font-size: 14px"
+                    [value]="year" ngDefaultControl>{{year}}</option>
+        </select>
+
+      </div>
+      <div>
+        <p *ngIf="error" style="color: red">The date is incorrect. Check it please and try again.</p>
+        <button (click)="birthdayInputValidator()"
+                [disabled]="!birthDay && !birthMonth && !birthYear"
+                style="display: block; margin-bottom: 15px; width: 150px">Next</button>
+        <button (click)="changeStep(1)"> Previous step </button>
+      </div>
+    </div>
+    <div *ngIf="step === 3">
+      <div style="margin-bottom: 15px;">
+        <input type="text" id="name"  [(ngModel)]="userName"/>
+        <label for="name">Name</label>
+      </div>
+      <div>
+        <button (click)="addProfileInfo()" [disabled]="!userName || userName.length == 0"
+                style="display: block; margin-bottom: 15px; width: 150px">Next</button>
+        <button (click)="changeStep(2)"> Previous step </button>
+      </div>
+    </div>
+  </div>
+</div>
