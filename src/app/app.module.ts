@@ -6,15 +6,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WelcomeComponent } from './welcome-page/welcome/welcome.component';
 import { Routes, RouterModule } from "@angular/router";
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { ProfileBirthdayComponent } from './sign-up/sign-up-profile-info/profile-birthday/profile-birthday.component';
-import { ProfileNameComponent } from './sign-up/sign-up-profile-info/profile-name/profile-name.component';
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { SignInEmailComponent } from './sign-in/sign-in-email/sign-in-email.component';
-import { ProfileGenderComponent } from './sign-up/sign-up-profile-info/profile-gender/profile-gender.component';
 import {StoreModule} from "@ngrx/store";
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileInfoComponent } from './profile/profile-info/profile-info.component';
+import { ProfileInfoComponent } from './sign-up/sign-up-profile-info/profile-info/profile-info.component';
 import {HttpClientModule} from "@angular/common/http";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./stores/effects/auth.effects";
@@ -27,12 +24,9 @@ const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
   {path: 'signin/email', component: SignInEmailComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'signup/gender', component: ProfileGenderComponent},
-  {path: 'signup/bday', component: ProfileBirthdayComponent},
-  {path: 'signup/name', component: ProfileNameComponent},
+  {path: 'signup/info', component: ProfileInfoComponent},
 
-  {path: 'profile', component: ProfileComponent},
-  {path: 'profile/edit', component: ProfileInfoComponent},
+  {path: 'profile/id', component: ProfileComponent, },
 
   {path: '', component: WelcomeComponent},
   {path: '**', redirectTo: '/'}
@@ -44,13 +38,10 @@ const appRoutes: Routes = [
     AppComponent,
     WelcomeComponent,
     SignUpComponent,
-    ProfileBirthdayComponent,
-    ProfileNameComponent,
     SignInComponent,
     SignInEmailComponent,
-    ProfileGenderComponent,
+    ProfileInfoComponent,
     ProfileComponent,
-    ProfileInfoComponent
   ],
   imports: [
     BrowserModule,

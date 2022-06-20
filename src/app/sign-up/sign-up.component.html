@@ -1,11 +1,11 @@
 <div class="container">
   <div>
-    <input type="email" [formControl]="email"
+    <input type="email" [formControl]="emailField"
            style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
-    <input type="password" [formControl]="password"
+    <input type="password" [formControl]="passwordField"
            style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
     <div>
-      <button (click)="addProfileInfo()" [disabled]="email.invalid || password.invalid"
+      <button (click)="signUpWithEmail()" [disabled]="emailField.invalid || passwordField.invalid"
               style="display: block; margin-bottom: 15px; width: 150px">Create account
       </button>
     </div>
