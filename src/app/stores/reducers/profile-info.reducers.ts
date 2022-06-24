@@ -1,8 +1,8 @@
 import {createReducer, on} from "@ngrx/store";
-import {setBirthday, setGender, setName, updateProfileInfo} from "../actions/profile-info.actions";
-import {ProfileInfo} from "../../dto/profileInfo";
+import {getProfileInfo, setBirthday, setGender, setName, updateProfileInfo} from "../actions/profile-info.actions";
+import {ProfileInfoRequest} from "../../dto/profileInfo";
 
-export const initialState: ProfileInfo= {
+export const initialState: ProfileInfoRequest = {
   gender: '',
   birthday: '',
   name: ''
@@ -24,5 +24,9 @@ export const profileInfoReducer = createReducer(
   on(updateProfileInfo, (state, action) => (
       {...state, gender: action.gender, birthday: action.birthday, name: action.name}
     )
-  )
+  ),
+  on(getProfileInfo, (state) => (
+    {...state}
+
+  ))
 )

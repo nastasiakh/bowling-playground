@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {UserDto} from "../dto/user.dto";
 import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {SignUpComponent} from "../sign-up/sign-up.component";
-import {SignUpCredentials} from "../stores/effects/auth.effects";
+import {LogInCredentials, SignUpCredentials} from "../dto/profileInfo";
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +13,19 @@ export class AuthService {
 
   constructor( private http: HttpClient) { }
 
-  signIn(email: string, password: string): Observable<UserDto> {
+  signIn(data: LogInCredentials): Observable<LogInCredentials> {
     return this.http.post(
       this.urlLogIn,
-      {email: email, password: password},
+      {email: data.email, password: data.password},
       {headers: {'Content-type': 'application/json'}}
-    ).pipe(map(e => e as UserDto))
+    ).pipe(map(e => e as LogInCredentials))
   }
-  signUp(data: SignUpCredentials): Observable<UserDto>{
+  signUp(data: SignUpCredentials): Observable<SignUpCredentials>{
     return this.http.post(
       this.urlSignUp,
       {email: data.email, password: data.password, id: data.id},
       {headers: {'Content-type': 'application/json'}}
-    ).pipe(map( e => e as UserDto))
+    ).pipe(map( e => e as SignUpCredentials))
   }
 
 }

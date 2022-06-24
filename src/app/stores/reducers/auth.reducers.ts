@@ -5,9 +5,9 @@ import {
   logInSuccessfully,
   signUpWithEmail
 } from "../actions/auth.actions";
-import {UserDto} from "../../dto/user.dto";
+import {LogInCredentials} from "../../dto/profileInfo";
 
-export const initialState: UserDto = {
+export const initialState: LogInCredentials = {
     email: '',
     password: ''
 
