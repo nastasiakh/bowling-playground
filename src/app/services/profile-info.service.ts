@@ -2,21 +2,28 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {ProfileInfo} from "../dto/profileInfo";
+import {ProfileInfo, ProfileInfoRequest} from "../dto/profileInfo";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileInfoService {
   urlAddNewProfileInfo = environment.baseUrl+'/signup/info'
+  urlGetProfileInfo = environment.baseUrl+'/profile/edit'
 
   constructor(private http: HttpClient) { }
 
-  addNewInfo(data: ProfileInfo): Observable<ProfileInfo> {
+  addNewInfo(data: ProfileInfoRequest): Observable<ProfileInfoRequest> {
     return this.http.post(
       this.urlAddNewProfileInfo,
       data,
       {headers: {'Content-type': 'application/json'}}
-    ).pipe(map(e => e as ProfileInfo))
+    ).pipe(map(e => e as ProfileInfoRequest))
+  }
+
+  getInfo(): Observable<ProfileInfo> {
+    return this.http.get(this.urlGetProfileInfo).pipe(
+      map(e => e as ProfileInfo)
+    )
   }
 }

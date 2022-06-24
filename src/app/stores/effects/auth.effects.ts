@@ -10,6 +10,7 @@ import {
 } from "../actions/auth.actions";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {LogInCredentials, SignUpCredentials} from "../../dto/profileInfo";
 
 @Injectable()
 export class AuthEffects {
@@ -24,7 +25,7 @@ export class AuthEffects {
   signIn$ = createEffect(() => this.actions$.pipe(
       ofType(logIn),
       switchMap(action =>
-        this._doSignIn(action.profile.email, action.profile.password))
+        this._doSignIn({email: action.profile.email, password: action.profile.password}))
     )
   )
 
@@ -35,9 +36,10 @@ export class AuthEffects {
 
   ))
 
-  _doSignIn(email: string, password: string) {
-    return this.authService.signIn(email, password).pipe(
+  _doSignIn(data: LogInCredentials) {
+    return this.authService.signIn(data).pipe(
       map(user => logInSuccessfully()),
+
       catchError(e => of(logInFailed()))
     )
   }
@@ -50,8 +52,4 @@ export class AuthEffects {
       )
   }
 }
-export interface SignUpCredentials{
-  email: string,
-  password: string,
-  id: string
-}
+

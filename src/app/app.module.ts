@@ -18,6 +18,8 @@ import {AuthEffects} from "./stores/effects/auth.effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment";
 import {authReducer} from "./stores/reducers/auth.reducers";
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import {profileInfoReducer} from "./stores/reducers/profile-info.reducers";
 
 
 const appRoutes: Routes = [
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'signup/info', component: ProfileInfoComponent},
 
-  {path: 'profile/id', component: ProfileComponent, },
+  {path: 'profile', component: ProfileComponent, },
+  {path: 'profile/edit', component: EditProfileComponent, },
 
   {path: '', component: WelcomeComponent},
   {path: '**', redirectTo: '/'}
@@ -42,13 +45,15 @@ const appRoutes: Routes = [
     SignInEmailComponent,
     ProfileInfoComponent,
     ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot({
-      'auth': authReducer
+      'auth': authReducer,
+      'profile_info': profileInfoReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

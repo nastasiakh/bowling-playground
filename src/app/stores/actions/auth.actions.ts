@@ -1,8 +1,7 @@
 import {createAction, props} from "@ngrx/store";
-import {UserDto} from "../../dto/user.dto";
-import {SignUpCredentials} from "../effects/auth.effects";
+import {LogInCredentials, SignUpCredentials} from "../../dto/profileInfo";
 
-export const logIn = createAction('LOG_IN', props<{profile: UserDto}>())
+export const logIn = createAction('LOG_IN', props<{profile: LogInCredentials}>())
 export const logInSuccessfully = createAction('LOG_IN_SUCCESSFULLY')
 export const logInFailed = createAction('LOG_IN_FAILED')
 

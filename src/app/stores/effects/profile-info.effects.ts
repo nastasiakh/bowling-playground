@@ -4,6 +4,9 @@ import {catchError, map, of, switchMap, } from "rxjs";
 import {Router} from "@angular/router";
 import {ProfileInfoService} from "../../services/profile-info.service";
 import {
+  getInfoFailed,
+  getInfoSuccessfully,
+  getProfileInfo,
   profileInfoFailed,
   profileInfoUpdated,
   setBirthday, setBirthdayFailed,
@@ -12,10 +15,10 @@ import {
   setGenderFailed,
   setGenderSuccessfully, setName, setNameFailed, setNameSuccessfully, updateProfileInfo
 } from "../actions/profile-info.actions";
-import {ProfileInfo} from "../../dto/profileInfo";
+import {ProfileInfo, ProfileInfoRequest} from "../../dto/profileInfo";
 
 @Injectable()
-export class AuthEffects {
+export class ProfileInfoEffects {
 
   constructor(
     private router: Router,
@@ -24,6 +27,9 @@ export class AuthEffects {
   ) {
   }
 
+  getProfileInfo$ = createEffect(()=> this.actions$.pipe(
+    ofType(getProfileInfo)
+  ))
   updateGender$ = createEffect(() => this.actions$.pipe(
     ofType(setGender),
     switchMap( action =>
@@ -79,7 +85,7 @@ export class AuthEffects {
   )
   )
 
-  _updateUserInfo(data: ProfileInfo){
+  _updateUserInfo(data: ProfileInfoRequest){
     return this.profileInfo.addNewInfo(data).
       pipe(
         map( newInfoValues => profileInfoUpdated()),
