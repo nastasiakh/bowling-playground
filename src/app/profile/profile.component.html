@@ -1,5 +1,5 @@
 <div>
-  <p>Profile</p>
+  <h1>Profile</h1>
   <div>
     <p>Name</p>
     <p>Email</p>
@@ -8,5 +8,7 @@
       <p>Notification</p>
     </div>
     <p>Log out</p>
+    {{profile$ | async}}
   </div>
+  <app-navbar></app-navbar>
 </div>

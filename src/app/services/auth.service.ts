@@ -9,7 +9,7 @@ import {LogInCredentials, SignUpCredentials} from "../dto/profileInfo";
 })
 export class AuthService {
   urlLogIn = environment.baseUrl+'/login'
-  urlSignUp = environment.baseUrl+'/signup'
+  urlSignUp = environment.baseUrl+'/users'
 
   constructor( private http: HttpClient) { }
 

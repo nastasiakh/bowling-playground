@@ -20,6 +20,10 @@ import {environment} from "../environments/environment";
 import {authReducer} from "./stores/reducers/auth.reducers";
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import {profileInfoReducer} from "./stores/reducers/profile-info.reducers";
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { StatisticsComponent } from './profile/statistics/statistics.component';
+import { TrainingComponent } from './profile/training/training.component';
+import { HomeComponent } from './profile/home/home.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +32,9 @@ const appRoutes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'signup/info', component: ProfileInfoComponent},
 
+  {path: 'home', component: HomeComponent},
+  {path: 'statistics', component: StatisticsComponent},
+  {path: 'training', component: TrainingComponent},
   {path: 'profile', component: ProfileComponent, },
   {path: 'profile/edit', component: EditProfileComponent, },
 
@@ -46,6 +53,10 @@ const appRoutes: Routes = [
     ProfileInfoComponent,
     ProfileComponent,
     EditProfileComponent,
+    NavbarComponent,
+    StatisticsComponent,
+    TrainingComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +64,7 @@ const appRoutes: Routes = [
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot({
       'auth': authReducer,
-      'profile_info': profileInfoReducer
+      'profileInfo': profileInfoReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

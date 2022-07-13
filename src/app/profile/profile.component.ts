@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from "@ngrx/store";
-import {Observable} from "redux";
+import {ProfileInfo, ProfileInfoRequest} from "../dto/profileInfo";
+import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +11,14 @@ import {Observable} from "redux";
 })
 export class ProfileComponent implements OnInit {
 
-  // profile$: Observable<any>
+  profile$: Observable<ProfileInfo> = this.store.select(state => state.profileInfo)
 
-  constructor(private store: Store) {
-    // this.profile$ = this.store.select('ge
+  constructor(private store: Store<{profileInfo: ProfileInfo}>) {
+
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
 }

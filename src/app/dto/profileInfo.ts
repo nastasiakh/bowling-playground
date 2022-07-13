@@ -16,3 +16,8 @@ export interface ProfileInfoRequest{
   name?: string,
   image?: string
 }
+export interface CurrentUser{
+  id: string,
+  email: string,
+  token: string
+}
