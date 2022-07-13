@@ -1,14 +1,17 @@
 <div class="container">
-  <div>
+  <div [hidden]="registrationStart.onclick">
     <input type="email" [formControl]="emailField"
            style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
     <input type="password" [formControl]="passwordField"
            style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
     <div>
       <button (click)="signUpWithEmail()" [disabled]="emailField.invalid || passwordField.invalid"
-              style="display: block; margin-bottom: 15px; width: 150px">Create account
+              style="display: block; margin-bottom: 15px; width: 150px" #registrationStart>Create account
       </button>
     </div>
   </div>
+  <app-profile-info *ngIf="registrationStart.onclick">
+
+  </app-profile-info>
 
 </div>

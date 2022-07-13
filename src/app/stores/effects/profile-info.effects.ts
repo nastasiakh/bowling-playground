@@ -27,14 +27,28 @@ export class ProfileInfoEffects {
   ) {
   }
 
-  getProfileInfo$ = createEffect(()=> this.actions$.pipe(
-    ofType(getProfileInfo)
+  // getProfileInfo$ = createEffect(()=> this.actions$.pipe(
+  //   ofType(getProfileInfo)
+  // ))
+  // updateGender$ = createEffect(() => this.actions$.pipe(
+  //   ofType(setGender),
+  //   switchMap( action =>
+  //     this._setGenderValue(action.gender))
+  // ))
+
+  _getUser(){
+    return this.profileInfo.getInfo().pipe(
+      map(single_pet => getInfoSuccessfully()),
+      catchError(e => of(getInfoFailed))
+    )
+  }
+  getPetInfo$ = createEffect(()=> this.actions$.pipe(
+    ofType(getProfileInfo),
+    switchMap( action => this._getUser()
+    )
   ))
-  updateGender$ = createEffect(() => this.actions$.pipe(
-    ofType(setGender),
-    switchMap( action =>
-      this._setGenderValue(action.gender))
-  ))
+
+
 
   _setGenderValue(gender: string){
     return this.profileInfo.addNewInfo({gender: gender}).
