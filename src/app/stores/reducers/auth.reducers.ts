@@ -2,14 +2,14 @@ import {createReducer, on} from "@ngrx/store";
 import {
   logIn,
   logInFailed,
-  logInSuccessfully,
-  signUpWithEmail
+  logInSuccessfully, signUpWithEmail, signUpWithEmailFailed, signUpWithEmailSuccessfully
 } from "../actions/auth.actions";
 import {LogInCredentials} from "../../dto/profileInfo";
 
-export const initialState: LogInCredentials = {
+export const initialState = {
     email: '',
-    password: ''
+    password: '',
+    uid:  '',
 
 };
 
@@ -25,9 +25,10 @@ export const authReducer = createReducer(
   on(signUpWithEmail, (state, action) => (
     {...state,
       email: action.profile.email,
-      password: action.profile.password,
-      id: action.profile.id}
+      password: action.profile.password}
     )
   ),
+  on(signUpWithEmailSuccessfully, (state, action)  =>({...state, uid: action.uid })),
+  on(signUpWithEmailFailed, (state)  =>({...state}))
 )
 

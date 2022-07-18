@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {setBirthday, setGender, setName, updateProfileInfo} from "../../../stores/actions/profile-info.actions";
+import {Observable} from "rxjs";
+import {AppState, currentUserSelector} from "../../../stores/selectors/auth.selector";
 
 @Component({
   selector: 'app-profile-info',
@@ -31,7 +33,11 @@ export class ProfileInfoComponent implements OnInit {
 
   step: number = 1
 
-  constructor(private router: Router, private store: Store) { }
+  currentUserId$: Observable<string|undefined>
+
+  constructor(private router: Router, private store: Store<AppState>) {
+    this.currentUserId$ = this.store.pipe(select(currentUserSelector))
+  }
 
   ngOnInit(): void {
     let y: number = this.dateRangeMin

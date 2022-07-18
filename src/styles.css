@@ -1,10 +1,412 @@
-/* You can add global styles to this file, and also import other style files */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
-html, body { height: 100%; overflow: hidden}
-body { margin: 0 auto; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 25px 35px}
-.container{
-  width: 400px;
-  padding: 15px;
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
   height: 100%;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+@font-face{
+  font-family: "Mont Semi Bold";
+  src: url("/assets/fonts/Mont/Mont-SemiBold.eot");
+  src: url("/assets/fonts/Mont/Mont-SemiBold.eot") format("embedded-opentype"),
+  url("/assets/fonts/Mont/Mont-SemiBold.ttf") format("truetype"),
+  url("/assets/fonts/Mont/Mont-SemiBold.woff") format("woff"),
+  url("/assets/fonts/Mont/Mont-SemiBold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Mont Regular";
+  src: url("/assets/fonts/Mont/Mont-Regular.eot");
+  src: url("/assets/fonts/Mont/Mont-Regular.eot") format("embedded-opentype"),
+  url("/assets/fonts/Mont/Mont-Regular.ttf") format("truetype"),
+  url("/assets/fonts/Mont/Mont-Regular.woff") format("woff"),
+  url("/assets/fonts/Mont/Mont-Regular.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+/*Переменные цветов и шрифтов, то, что можно без последствий менять*/
+:root{
+  --primary-font: "Mont Regular";
+  --bold-font: "Mont Semi Bold";
+  --main-text-color: #1F2922;
+  --secondary-text-color: #FCFFFE;
+  --main-element-color: #6FCF97;
+  --secondary-element-color: #ECF2F0;
+  --third-element-color: #BDBDBD;
+  --fourth-element-color: #F4F7F6;
+  --accent-element-color: #F2C94C;
+}
+/*Родительский компонент контента*/
+
+.container{
+  display: flex;
+  justify-content: center;
+  background: #FFFFFF;
+  min-height: 100%;
+  margin: 0 auto;
   overflow: hidden;
+}
+@media (min-width: 768px ){
+  .container{
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    min-height: 100%;
+    margin: 0 auto;
+    width: 450px;
+    overflow: hidden;
+  }
+}
+a{
+  text-decoration: none;
+}
+/*Добавляет свойство дисплей флекс*/
+.d-flex{
+  display: flex;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+.h-100{
+  height: 100%;
+}
+/*Добавляет свойство дисплей блок*/
+.d-block{
+  display: block;
+}
+/* Заголовок типа велком или лог-ин на странице*/
+.heading{
+  font-size: 28px;
+  color: var(--main-text-color);
+  text-transform: uppercase;
+  font-family: var(--bold-font);
+  text-align: center;
+  margin-bottom: 14px;
+}
+/*Зеленые кнопки*/
+.accept-button{
+  color: var(--secondary-text-color);
+  background: var(--main-element-color);
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid var(--main-element-color);
+  border-radius: 8px;
+  padding: 20px 0;
+  opacity: 1;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.accept-button:focus-visible{
+  color: var(--secondary-text-color);
+  background: #97E8B8;
+  border: 1px solid var(--main-element-color);
+  outline: none;
+}
+.accept-button:disabled{
+  color: var(--secondary-text-color);
+  background: var(--third-element-color);
+  border: 1px solid var(--third-element-color);
+}
+
+/* Кнопки с белым фоном*/
+.non-filled-button{
+  color: var(--main-element-color);
+  background: var(--secondary-text-color);
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid var(--third-element-color);
+  border-radius: 8px;
+  padding: 20px 0 20px 50px;
+  opacity: 1;
+  text-align: center;
+  position: relative;
+}
+.non-filled-button:focus-visible{
+  background: var(--third-element-color);
+  opacity: 1;
+  outline: none;
+}
+.non-filled-button:disabled{
+  opacity: 0;
+}
+/*Стиль для инпутов*/
+.input-style{
+  display: block;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family: var(--primary-font);
+  border: 1px solid var(--secondary-element-color);
+  padding: 20px 16px;
+  background: var(--secondary-element-color);
+  opacity: 1;
+  color: var(--main-text-color);
+}
+.input-style:focus-visible{
+  border: 1px solid var(--main-element-color);
+  background: var(--fourth-element-color);
+  opacity: 1;
+  outline: none;
+}
+.grey-btn {
+  color: var(--main-text-color);
+  background: var(--secondary-element-color);
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid var(--secondary-element-color);
+  border-radius: 8px;
+  padding: 20px 0;
+  opacity: 1;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.grey-btn:focus-visible{
+  background: var(--third-element-color);
+  opacity: 1;
+  outline: none;
+}
+.regular-20{
+  font-family: var(--primary-font);
+  font-size: 20px;
+  color: var(--main-text-color);
+  font-weight: 600;
+}
+.regular-18{
+  font-family: var(--primary-font);
+  font-size: 18px;
+  color: var(--main-text-color);
+  font-weight: 600;
+}
+.regular-16{
+  font-family: var(--primary-font);
+  font-size: 16px;
+  color: var(--main-text-color);
+  font-weight: 600;
+}
+/*Класс для текста 14px weight 600*/
+.regular-14{
+  font-family: var(--primary-font);
+  font-size: 14px;
+  color: var(--main-text-color);
+  font-weight: 600;
+}
+.error-10{
+  font-family: var(--primary-font);
+  font-size: 10px;
+  color: red;
+  font-weight: 600;
+}
+/*Класс для текста 20px bold 700*/
+.bold-24{
+  font-family: var(--primary-font);
+  font-size: 24px;
+  color: var(--main-text-color);
+  font-weight: 700;
+}
+.bold-20{
+  font-family: var(--primary-font);
+  font-size: 20px;
+  color: var(--main-text-color);
+  font-weight: 700;
+}
+/*Класс для текста 18px weight 700*/
+.bold-18{
+  font-family: var(--primary-font);
+  font-size: 18px;
+  color: var(--main-text-color);
+  font-weight: 700;
+}
+/*Класс для текста 14px weight 700*/
+.bold-14{
+  font-family: var(--primary-font);
+  font-size: 14px;
+  color: var(--main-text-color);
+  font-weight: 700;
+}
+/*Класс для элемента по ширине на всю страницу*/
+.w-100{
+  width: 100%;
+}
+/*Класс для элемента по ширине на пол страницы*/
+.w-50{
+  width: 50%;
+}
+/*Класс для элемента по ширине на треть страницы*/
+.w-33{
+  width: 33.3%;
+}
+.white-text{
+  color: var(--secondary-text-color);
+}
+.green-text{
+  color: var(--main-element-color);
+}
+.mb-60{
+  margin-bottom: 60px;
+}
+.mb-30{
+  margin-bottom: 30px;
+}
+.mb-20{
+  margin-bottom: 20px;
+}
+.mb-15{
+  margin-bottom: 15px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+/*Класс для элемента который у правого края*/
+.absolute-r{
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.relative-block {
+  display: block;
+  position: relative;
+}
+
+/*Класс для элемента навигации вверху справа*/
+.prev-pg-link{
+  position: absolute;
+  display: flex;
+  background: url("src/assets/images/Vector 1 (Stroke).svg") no-repeat;
+  background-position: left;
+  content: "";
+  width: 14px;
+  height: 24px;
+  top: 31px;
+  left: 5px;
+  border: none;
+  padding: 20px;
+}
+
+.bgd-circle-top{
+  position: absolute;
+  display: block;
+  width: 111%;
+  height: 50%;
+  bottom: unset;
+  top: -230px;
+  left: -15px;
+  z-index: 0;
+  background: #6FCF97;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+span.bgd-circle-bottom {
+  position: absolute;
+  display: block;
+  width: 107%;
+  height: 50%;
+  bottom: -225px;
+  left: -15px;
+  z-index: 0;
+  background: #6FCF97;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+.text-center{
+  text-align: center;
+}
+.page-wrapper{
+  padding: 280px 15px 205px ;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.icons{
+  display: block;
+  content: '';
+  width: 23px;
+  height: 23px;
+  top: 25%;
+  position: absolute;
+  left: 40%;
+  transform: translateX(-50%);
+  right: 0;
+}
+.icons.google{
+  background: url("src/assets/images/google.svg") no-repeat center;
+}
+.icons.fb{
+  background: url("src/assets/images/facebook.svg") no-repeat center;
+}
+.icons.phone{
+  background: url("src/assets/images/Vector.svg") no-repeat center;
+}
+
+.show-pass-icon{
+  display: block;
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  background: url("src/assets/images/eye.svg") no-repeat center;
+}
+.show-pass-icon.hidden{
+  background: url("src/assets/images/Group 195.svg") no-repeat center;
+}
+.correct,
+.wrong{
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+}
+
+.correct{
+  background: url("src/assets/images/check mark.svg") no-repeat center #ffffff;
+}
+.wrong{
+  background: url("src/assets/images/icon cross.svg") no-repeat center #ffffff;
 }

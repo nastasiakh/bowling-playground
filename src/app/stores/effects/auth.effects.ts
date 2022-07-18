@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {catchError, map, of, switchMap, } from "rxjs";
+import {catchError, from, map, of, switchMap,} from "rxjs";
 import {
   logIn,
   logInFailed,
@@ -21,33 +21,33 @@ export class AuthEffects {
     private authService: AuthService
   ) {
   }
-
-  signIn$ = createEffect(() => this.actions$.pipe(
-      ofType(logIn),
-      switchMap(action =>
-        this._doSignIn({email: action.profile.email, password: action.profile.password}))
-    )
-  )
+  //
+  // signIn$ = createEffect(() => this.actions$.pipe(
+  //     ofType(logIn),
+  //     switchMap(action =>
+  //       this._doSignIn({email: action.profile.email, password: action.profile.password}))
+  //   )
+  // )
 
   signUpEmail$ = createEffect(() => this.actions$.pipe(
     ofType(signUpWithEmail),
     switchMap(action =>
-      this._doSignUp({email: action.profile.email, password: action.profile.password, id: action.profile.id}))
+      this._doSignUp({email: action.profile.email, password: action.profile.password}))
 
   ))
 
-  _doSignIn(data: LogInCredentials) {
-    return this.authService.signIn(data).pipe(
-      map(user => logInSuccessfully()),
-
-      catchError(e => of(logInFailed()))
-    )
-  }
+  // _doSignIn(data: LogInCredentials) {
+  //   return this.authService.signIn(data).pipe(
+  //     map(user => logInSuccessfully()),
+  //
+  //     catchError(e => of(logInFailed()))
+  //   )
+  // }
 
   _doSignUp(data: SignUpCredentials) {
-    return this.authService.signUp(data).
+    return from(this.authService.signUp(data)).
       pipe(
-        map(newUser => signUpWithEmailSuccessfully()),
+        map(newUser => signUpWithEmailSuccessfully({uid: newUser})),
         catchError(e => of(signUpWithEmailFailed()))
       )
   }

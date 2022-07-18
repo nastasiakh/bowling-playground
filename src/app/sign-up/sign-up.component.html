@@ -1,17 +1,36 @@
 <div class="container">
-  <div [hidden]="registrationStart.onclick">
-    <input type="email" [formControl]="emailField"
-           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
-    <input type="password" [formControl]="passwordField"
-           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
-    <div>
-      <button (click)="signUpWithEmail()" [disabled]="emailField.invalid || passwordField.invalid"
-              style="display: block; margin-bottom: 15px; width: 150px" #registrationStart>Create account
-      </button>
-    </div>
+  <div class="page-wrapper">
+    <span class="bgd-circle-top"></span>
+    <div id="sign-up-page" class="w-100">
+      <header>
+        <a class="prev-pg-link" href="#"></a>
+      </header>
+      <h1 class="heading">Sign up</h1>
+      <div class="login">
+        <div class="login_input">
+          <input class="w-100 mb-20 input-style" type="email" [formControl]="emailField"/>
+<!--          <p *ngIf="!emailField.valid">Email is invalid. Please, check it and try again.</p>-->
+
+        </div>
+        <div class="password_input">
+          <input class="w-100 mb-20 input-style" [type]="shownPassword ? 'text': 'password'" [formControl]="passwordField"/>
+          <span class="show-pass-icon" [class]="shownPassword ? 'hidden': '' " (click)="showPassword()"></span>
+        </div>
+<!--        <p *ngIf="error">Email or password is incorrect. Please, check it and try again.</p>-->
+      </div>
+      <div>
+        <button (click)="signUpWithEmail()" [disabled]="emailField.invalid || passwordField.invalid"
+                class="accept-button w-100" #registrationStart>Create account
+        </button>
+
+      </div>
+      <footer class="w-100 text-center footer">
+        <span class="bold-14">Already have an account? <span routerLink="/signup" class="bold-14 green-text">Sign In</span></span>
+        <div class="pin-bgd">
+          <span class="left-pin"></span>
+          <span class="right-pin"></span>
+        </div>
+      </footer>
   </div>
-  <app-profile-info *ngIf="registrationStart.onclick">
-
-  </app-profile-info>
-
+  </div>
 </div>

@@ -1,0 +1,53 @@
+.page-wrapper{
+  padding: 170px 15px 205px;
+}
+.signup-message{
+  margin-top: 20px;
+  justify-content: center;
+}
+.footer{
+  height: 200px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+.bgd-circle-top {
+  top: -211px;
+}
+.pin-bgd{
+  height: 210px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.pin-bgd .left-pin{
+  position: absolute;
+  display: block;
+  background: url("src/assets/images/Bowling_Pin_PNG_Clipart-846 1.png") no-repeat center;
+  background-size: cover;
+  height: 200px;
+  width: 190px;
+  bottom: 0;
+  left: 0;
+}
+.pin-bgd .right-pin{
+  position: absolute;
+  display: block;
+  background: url("src/assets/images/Bowling_Pin_PNG_Clipart-846 2.png") no-repeat center;
+  background-size: cover;
+  height: 137px;
+  width: 110px;
+  bottom: 0;
+  right: 0;
+}
+.password_input{
+  position: relative;
+}
+.footer>span{
+  z-index: 5;
+  padding: 5px;
+}
+.footer div{
+  z-index: 0;
+}
+

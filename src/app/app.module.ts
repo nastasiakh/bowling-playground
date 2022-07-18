@@ -24,6 +24,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { StatisticsComponent } from './profile/statistics/statistics.component';
 import { TrainingComponent } from './profile/training/training.component';
 import { HomeComponent } from './profile/home/home.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 const appRoutes: Routes = [
@@ -74,7 +76,9 @@ const appRoutes: Routes = [
 
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   exports: [RouterModule],
   providers: [],

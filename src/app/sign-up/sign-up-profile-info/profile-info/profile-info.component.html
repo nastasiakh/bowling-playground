@@ -1,6 +1,7 @@
 <div class="container">
   <div>
     <div *ngIf="step === 1">
+      {{currentUserId$ | async}}
       <div style="margin-bottom: 15px;" >
         <input type="radio" name="gender-radio" id="female" value="female" [(ngModel)]="genderValue"/>
         <label for="female">Female</label>

@@ -6,7 +6,7 @@ export const logInSuccessfully = createAction('LOG_IN_SUCCESSFULLY')
 export const logInFailed = createAction('LOG_IN_FAILED')
 
 export const signUpWithEmail = createAction('SIGNED_UP_WITH_EMAIL', props<{profile: SignUpCredentials}>())
-export const signUpWithEmailSuccessfully = createAction('SIGNED_UP_WITH_EMAIL_SUCCESSFULLY')
+export const signUpWithEmailSuccessfully = createAction('SIGNED_UP_WITH_EMAIL_SUCCESSFULLY', props<{uid: string}>())
 export const signUpWithEmailFailed = createAction('SIGNED_UP_WITH_EMAIL_FAILED')
 
 
