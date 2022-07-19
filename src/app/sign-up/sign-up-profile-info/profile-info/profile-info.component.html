@@ -1,7 +1,6 @@
 <div class="container">
   <div>
     <div *ngIf="step === 1">
-      {{currentUserId$ | async}}
       <div style="margin-bottom: 15px;" >
         <input type="radio" name="gender-radio" id="female" value="female" [(ngModel)]="genderValue"/>
         <label for="female">Female</label>
@@ -14,6 +13,7 @@
         <button (click)="changeStep(2)"  [disabled]="!genderValue"
                 style="display: block; margin-bottom: 15px; width: 150px">Next</button>
       </div>
+      {{currentUserId$ | async}}
     </div>
     <div *ngIf="step === 2">
       <div style="margin-bottom: 15px;" >

@@ -53,7 +53,9 @@ export class ProfileInfoComponent implements OnInit {
       d = d+1
       this.days.push(d)
     } while (d <= 31)
+
   }
+
 
   changeStep(value: number){
     this.step = value

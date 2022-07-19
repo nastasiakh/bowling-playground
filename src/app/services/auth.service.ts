@@ -20,16 +20,16 @@ export class AuthService {
   //     {headers: {'Content-type': 'application/json'}}
   //   ).pipe(map(e => e as LogInCredentials))
   // }
-  async signUp(data: SignUpCredentials): Promise<string>{
-    const newUser = await createUserWithEmailAndPassword(this.auth, data.email, data.password).catch(
-        (error) => {
-          if ( error.code === 'auth/account-exists-with-different-credential'){
-            console.log('Oops...smth happened')
-          }
-        })
-
-    return newUser.user.uid
-
+  async signUp(data: SignUpCredentials): Promise<string|undefined>{
+    const newUser = await createUserWithEmailAndPassword(this.auth, data.email, data.password).then(
+      (user) => {return user.user.uid}
+    ).catch(
+      (error) => {
+        if ( error.code === 'auth/account-exists-with-different-credential'){
+          return error
+        }
+      })
+    return newUser
   }
 
 }

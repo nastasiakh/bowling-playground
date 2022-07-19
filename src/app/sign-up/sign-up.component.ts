@@ -18,6 +18,7 @@ export class SignUpComponent{
   shownPassword: boolean = false
 
   constructor(private router: Router, private store: Store) {
+
   }
 
 
