@@ -4,14 +4,8 @@ import {
   logInFailed,
   logInSuccessfully, signUpWithEmail, signUpWithEmailFailed, signUpWithEmailSuccessfully
 } from "../actions/auth.actions";
-import {LogInCredentials} from "../../dto/profileInfo";
 
-export const initialState: UserStateInterface= {
-    email: '',
-    password: '',
-    uid: '',
-
-};
+export const initialState: UserStateInterface = {};
 
 export const authReducer = createReducer(
   initialState,
@@ -23,17 +17,33 @@ export const authReducer = createReducer(
   on(logInFailed, (state)  =>({...state})),
 
   on(signUpWithEmail, (state, action) => (
-    {...state,
-      email: action.profile.email,
-      password: action.profile.password}
+      {
+        ...state,
+        email: action.profile.email,
+        password: action.profile.password,
+        waitingSignUp: true
+      }
     )
   ),
-  on(signUpWithEmailSuccessfully, (state, action)  =>({...state, uid: action.uid })),
-  on(signUpWithEmailFailed, (state)  =>({...state}))
+  on(signUpWithEmailSuccessfully, (state, action) => (
+      {
+        ...state,
+        uid: action.uid,
+        waitingSignUp: false
+      }
+    )
+  ),
+  on(signUpWithEmailFailed, (state) => (
+      {
+        ...state,
+        waitingSignUp: false
+      }
+    )
+  )
 )
 
 export interface UserStateInterface{
   email?: string,
-  password?: string,
   uid?: string,
+  waitingSignUp?: boolean
 }

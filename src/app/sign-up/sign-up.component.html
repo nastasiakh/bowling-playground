@@ -1,6 +1,6 @@
 <div class="container">
+  <span class="bgd-circle-top"></span>
   <div class="page-wrapper">
-    <span class="bgd-circle-top"></span>
     <div id="sign-up-page" class="w-100">
       <header>
         <a class="prev-pg-link" href="#"></a>
@@ -19,7 +19,8 @@
 <!--        <p *ngIf="error">Email or password is incorrect. Please, check it and try again.</p>-->
       </div>
       <div>
-        <button (click)="signUpWithEmail()" [disabled]="emailField.invalid || passwordField.invalid"
+        <button (click)="signUpWithEmail()"
+                [disabled]="emailField.invalid || passwordField.invalid || (waiting$ | async)"
                 class="accept-button w-100" #registrationStart>Create account
         </button>
 

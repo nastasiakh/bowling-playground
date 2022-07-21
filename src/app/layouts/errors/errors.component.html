@@ -1,0 +1,11 @@
+<div class="snack-container" *ngIf="errorMessage$ | async">
+  <div class="snack-text-wrapper">
+    <div class="snack-text">
+        {{errorMessage$ | async}}
+    </div>
+
+    <div class="snack-action">
+      <button type="button" [routerLink]="routerTo" (click)="closeError()">{{errorSolution$ | async}}</button>
+    </div>
+  </div>
+</div>

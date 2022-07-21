@@ -4,7 +4,8 @@ import {select, Store} from "@ngrx/store";
 import {FormControl, Validators} from "@angular/forms";
 import {signUpWithEmail} from "../stores/actions/auth.actions";
 import {AppState, currentUserSelector} from "../stores/selectors/auth.selector";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
+import {UserStateInterface} from "../stores/reducers/auth.reducers";
 
 @Component({
   selector: 'app-sign-up',
@@ -14,11 +15,12 @@ import {Observable} from "rxjs";
 export class SignUpComponent{
   emailField = new FormControl('',[Validators.required, Validators.email])
   passwordField = new FormControl('',[Validators.required, Validators.minLength(6)])
-  error = {}
   shownPassword: boolean = false
 
-  constructor(private router: Router, private store: Store) {
+  waiting$ : Observable<boolean>
 
+  constructor(private router: Router, private store: Store) {
+    this.waiting$ = this.store.pipe(map((state:any) => state.auth.waitingSignUp ?? false))
   }
 
 
@@ -36,7 +38,6 @@ export class SignUpComponent{
           email: this.emailField.value,
           password: this.passwordField.value}
       }))
-      this.router.navigate(['signup', 'info'])
     }
   }
 }

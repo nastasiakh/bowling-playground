@@ -1,0 +1,42 @@
+.snack-container{
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  width: 80%;
+  padding: 15px;
+  background: #eda5a5;
+  box-shadow: 0 1px 8px #888888;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 4px;
+  z-index: 100;
+  opacity: 1;
+}
+.snack-text-wrapper{
+  margin-bottom: 5px;
+}
+.snack-text{
+  color: white;
+  font-size: 12px;
+  font-family: var(--primary-font);
+  font-weight: bolder;
+}
+.snack-action{
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.snack-action button{
+  padding: 15px;
+  color: white;
+  background: transparent;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: var(--primary-font);
+  font-weight: bolder;
+  box-sizing: border-box;
+  border: none;
+}

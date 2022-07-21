@@ -8,9 +8,10 @@ import {
   signUpWithEmailFailed,
   signUpWithEmailSuccessfully
 } from "../actions/auth.actions";
-import {AuthService} from "../../services/auth.service";
+import {AuthService, UserExistedError} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {LogInCredentials, SignUpCredentials} from "../../dto/profileInfo";
+import {displayToast} from "../actions/errors.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -28,14 +29,6 @@ export class AuthEffects {
   //       this._doSignIn({email: action.profile.email, password: action.profile.password}))
   //   )
   // )
-
-  signUpEmail$ = createEffect(() => this.actions$.pipe(
-    ofType(signUpWithEmail),
-    switchMap(action =>
-      this._doSignUp({email: action.profile.email, password: action.profile.password}))
-
-  ))
-
   // _doSignIn(data: LogInCredentials) {
   //   return this.authService.signIn(data).pipe(
   //     map(user => logInSuccessfully()),
@@ -44,11 +37,33 @@ export class AuthEffects {
   //   )
   // }
 
+  signUpEmail$ = createEffect(() => this.actions$.pipe(
+    ofType(signUpWithEmail),
+    switchMap(action =>
+      this._doSignUp({email: action.profile.email, password: action.profile.password}))
+
+  ))
+
   _doSignUp(data: SignUpCredentials) {
     return from(this.authService.signUp(data)).
       pipe(
-        map(newUser => signUpWithEmailSuccessfully({uid: newUser})),
-        catchError(e => of(signUpWithEmailFailed()))
+        map(newUser => {
+          this.router.navigate(['signup', 'info'])
+          return signUpWithEmailSuccessfully({uid: newUser})
+        }),
+        catchError(e => {
+          if( e instanceof UserExistedError){
+            return of(displayToast(
+              {
+                title: 'Oops',
+                errorSolution: 'log in',
+                message: 'User Existed. Try to log in instead'
+              }
+            )
+            )
+          }
+          return of(signUpWithEmailFailed())
+        })
       )
   }
 }

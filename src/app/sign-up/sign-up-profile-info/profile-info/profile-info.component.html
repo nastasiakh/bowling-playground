@@ -1,19 +1,47 @@
 <div class="container">
-  <div>
-    <div *ngIf="step === 1">
-      <div style="margin-bottom: 15px;" >
-        <input type="radio" name="gender-radio" id="female" value="female" [(ngModel)]="genderValue"/>
-        <label for="female">Female</label>
+  <div class="">
+    <div id="gender-page" class="w-100" *ngIf="step === 1">
+      <h2 class="bold-24 ">What’s your gender?</h2>
+      <div class="gender-wrapper">
+        <div>
+          <input type="radio" id="male" name="gender-radio" value="male" [class.active]="isActiveMale"
+                 [(ngModel)]="genderValue" (click)="changeClassMale()">
+          <label class="male" for="male">
+            <img [src]="isActiveMale ? 'assets/images/Group%20147.svg':'assets/images/Group%20146.svg' " alt="pic">
+            <span class="text regular-20">Male</span>
+            <span class="chosen" [class.visible]="isActiveMale === true">
+            <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 6.5L6 11L14 1" stroke="#6FCF97" stroke-width="2"/>
+            </svg>
+          </span>
+          </label>
+        </div>
+        <div class="">
+          <input type="radio" id="female" name="gender-radio" value="female" [class.active]="isActiveFemale"
+                 [(ngModel)]="genderValue" (click)="changeClassFemale()">
+          <label class="female" for="female">
+            <img [src]="isActiveFemale ? 'assets/images/svg.svg':'assets/images/Group%20145.svg' " alt="pic">
+            <span class="text regular-20">Female</span>
+            <span class="chosen" [class.visible]="isActiveFemale === true">
+          <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 6.5L6 11L14 1" stroke="#6FCF97" stroke-width="2"/>
+          </svg>
+        </span>
+          </label>
+        </div>
       </div>
-      <div style="margin-bottom: 15px;" >
-        <input type="radio" id="male" name="gender-radio" value="male" [(ngModel)]="genderValue"/>
-        <label for="male">Male</label>
+
+      <div class="ellipse-wrapper">
+        <div class="ellipse-black"></div>
+        <div class="ellipse-grey"></div>
+        <div class="ellipse-grey"></div>
       </div>
-      <div>
-        <button (click)="changeStep(2)"  [disabled]="!genderValue"
-                style="display: block; margin-bottom: 15px; width: 150px">Next</button>
+      <div class="btn-wrapper">
+        <button  class="w-100 accept-button" (click)="changeStep(2)" [disabled]="!genderValue"
+                >Next
+        </button>
       </div>
-      {{currentUserId$ | async}}
+    </div>
     </div>
     <div *ngIf="step === 2">
       <div style="margin-bottom: 15px;" >
@@ -37,6 +65,11 @@
         </select>
 
       </div>
+      <div class="ellipse-wrapper">
+        <div class="ellipse-grey"></div>
+        <div class="ellipse-black"></div>
+        <div class="ellipse-grey"></div>
+      </div>
       <div>
         <p *ngIf="error" style="color: red">The date is incorrect. Check it please and try again.</p>
         <button (click)="birthdayInputValidator()"
@@ -50,6 +83,11 @@
         <input type="text" id="name"  [(ngModel)]="userName"/>
         <label for="name">Name</label>
       </div>
+      <div class="ellipse-wrapper">
+        <div class="ellipse-grey"></div>
+        <div class="ellipse-grey"></div>
+        <div class="ellipse-black"></div>
+      </div>
       <div>
         <button (click)="addProfileInfo()" [disabled]="!userName || userName.length == 0"
                 style="display: block; margin-bottom: 15px; width: 150px">Next</button>
@@ -57,4 +95,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -83,6 +83,7 @@ table {
   min-height: 100%;
   margin: 0 auto;
   overflow: hidden;
+  position: relative;
 }
 @media (min-width: 768px ){
   .container{
@@ -326,11 +327,11 @@ a{
 .bgd-circle-top{
   position: absolute;
   display: block;
-  width: 111%;
+  width: 104%;
   height: 50%;
   bottom: unset;
   top: -230px;
-  left: -15px;
+  right: -13px;
   z-index: 0;
   background: #6FCF97;
   border-radius: 50%;

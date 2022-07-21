@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import {map, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
 import {LogInCredentials, SignUpCredentials} from "../dto/profileInfo";
 import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
 
@@ -20,16 +17,20 @@ export class AuthService {
   //     {headers: {'Content-type': 'application/json'}}
   //   ).pipe(map(e => e as LogInCredentials))
   // }
-  async signUp(data: SignUpCredentials): Promise<string|undefined>{
-    const newUser = await createUserWithEmailAndPassword(this.auth, data.email, data.password).then(
-      (user) => {return user.user.uid}
-    ).catch(
-      (error) => {
-        if ( error.code === 'auth/account-exists-with-different-credential'){
-          return error
-        }
-      })
-    return newUser
+  async signUp(data: SignUpCredentials): Promise<string>{
+    try {
+      const newUser = await createUserWithEmailAndPassword(this.auth, data.email, data.password)
+      return newUser.user.uid
+    }catch (error: any)  {
+      // console.log('error', error)
+      if(error.code === 'auth/email-already-in-use'){
+        throw new UserExistedError()
+      }
+      throw error
+    }
   }
+}
+
+export class UserExistedError extends Error{
 
 }

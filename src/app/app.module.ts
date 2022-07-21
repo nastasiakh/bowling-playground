@@ -26,6 +26,9 @@ import { TrainingComponent } from './profile/training/training.component';
 import { HomeComponent } from './profile/home/home.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import {ToastMessagesReducer} from "./stores/reducers/errors.reducer";
+import { ErrorsComponent } from './layouts/errors/errors.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 const appRoutes: Routes = [
@@ -59,27 +62,30 @@ const appRoutes: Routes = [
     StatisticsComponent,
     TrainingComponent,
     HomeComponent,
+    ErrorsComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot({
-      'auth': authReducer,
-      'profileInfo': profileInfoReducer
-    }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    }),
-    [RouterModule.forRoot(appRoutes)],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        EffectsModule.forRoot([AuthEffects]),
+        StoreModule.forRoot({
+            'auth': authReducer,
+            'profileInfo': profileInfoReducer,
+            'errorMessage': ToastMessagesReducer,
+        }),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production
+        }),
+        [RouterModule.forRoot(appRoutes)],
 
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
-  ],
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        MatSnackBarModule
+    ],
   exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]

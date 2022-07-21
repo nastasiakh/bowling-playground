@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {setBirthday, setGender, setName, updateProfileInfo} from "../../../stores/actions/profile-info.actions";
+import {updateProfileInfo} from "../../../stores/actions/profile-info.actions";
 import {Observable} from "rxjs";
-import {AppState, currentUserSelector} from "../../../stores/selectors/auth.selector";
+import {AppState, currentUserIdSelector} from "../../../stores/selectors/auth.selector";
 
 @Component({
   selector: 'app-profile-info',
@@ -11,6 +11,8 @@ import {AppState, currentUserSelector} from "../../../stores/selectors/auth.sele
   styleUrls: ['./profile-info.component.css']
 })
 export class ProfileInfoComponent implements OnInit {
+  isActiveMale = false;
+  isActiveFemale = false;
 
   genderValue: string = ''
   days = [1]
@@ -36,7 +38,7 @@ export class ProfileInfoComponent implements OnInit {
   currentUserId$: Observable<string|undefined>
 
   constructor(private router: Router, private store: Store<AppState>) {
-    this.currentUserId$ = this.store.pipe(select(currentUserSelector))
+    this.currentUserId$ = this.store.pipe(select(currentUserIdSelector))
   }
 
   ngOnInit(): void {
@@ -56,10 +58,19 @@ export class ProfileInfoComponent implements OnInit {
 
   }
 
-
   changeStep(value: number){
     this.step = value
   }
+
+  changeClassMale() {
+    this.isActiveMale = true;
+    this.isActiveFemale = false;
+  }
+  changeClassFemale() {
+    this.isActiveMale = false;
+    this.isActiveFemale = true;
+  }
+
   birthdayInputValidator(){
     let day = Number(this.birthDay)
     let month = Number(this.birthMonth)
