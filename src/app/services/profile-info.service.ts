@@ -8,7 +8,7 @@ import { ProfileInfo, ProfileInfoRequest} from "../dto/profileInfo";
   providedIn: 'root'
 })
 export class ProfileInfoService {
-  url = environment.baseUrl+'/users'
+  url = environment.baseUrl+'/signup/info'
 
   constructor(private http: HttpClient) { }
 

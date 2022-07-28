@@ -9,7 +9,7 @@
 h2{
   text-align: center;
 }
-input{
+.gender-wrapper input{
   display: none;
 }
 label{

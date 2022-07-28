@@ -4,6 +4,7 @@ import {
   logInFailed,
   logInSuccessfully, signUpWithEmail, signUpWithEmailFailed, signUpWithEmailSuccessfully
 } from "../actions/auth.actions";
+import {displayToast} from "../actions/errors.actions";
 
 export const initialState: UserStateInterface = {};
 
@@ -34,6 +35,13 @@ export const authReducer = createReducer(
     )
   ),
   on(signUpWithEmailFailed, (state) => (
+      {
+        ...state,
+        waitingSignUp: false
+      }
+    )
+  ),
+  on(displayToast, (state) => (
       {
         ...state,
         waitingSignUp: false

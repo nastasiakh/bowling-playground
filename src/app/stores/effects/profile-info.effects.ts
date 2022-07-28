@@ -87,10 +87,10 @@ export class ProfileInfoEffects {
     )
   }
 
-  updateProfile$ = createEffect(() => this.actions$.pipe(
+  createProfile$ = createEffect(() => this.actions$.pipe(
     ofType(updateProfileInfo),
     switchMap( action =>
-      this._updateUserInfo(
+      this._addUserInfo(
         {gender: action.gender,
           birthday: action.birthday,
           name: action.name}
@@ -99,7 +99,7 @@ export class ProfileInfoEffects {
   )
   )
 
-  _updateUserInfo(data: ProfileInfoRequest){
+  _addUserInfo(data: ProfileInfoRequest){
     return this.profileInfo.addNewInfo(data).
       pipe(
         map( newInfoValues => profileInfoUpdated()),
