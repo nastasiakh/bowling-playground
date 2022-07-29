@@ -4,16 +4,16 @@ import {catchError, map, of, switchMap, } from "rxjs";
 import {Router} from "@angular/router";
 import {ProfileInfoService} from "../../services/profile-info.service";
 import {
+  addProfileInfo,
   getInfoFailed,
   getInfoSuccessfully,
-  getProfileInfo,
+  getProfileInfo, profileInfoAdded,
   profileInfoFailed,
-  profileInfoUpdated,
   setBirthday, setBirthdayFailed,
   setBirthdaySuccessfully,
   setGender,
   setGenderFailed,
-  setGenderSuccessfully, setName, setNameFailed, setNameSuccessfully, updateProfileInfo
+  setGenderSuccessfully, setName, setNameFailed, setNameSuccessfully,
 } from "../actions/profile-info.actions";
 import {ProfileInfo, ProfileInfoRequest} from "../../dto/profileInfo";
 
@@ -47,8 +47,6 @@ export class ProfileInfoEffects {
     switchMap( action => this._getUser()
     )
   ))
-
-
 
   _setGenderValue(gender: string){
     return this.profileInfo.addNewInfo({gender: gender}).
@@ -88,10 +86,12 @@ export class ProfileInfoEffects {
   }
 
   createProfile$ = createEffect(() => this.actions$.pipe(
-    ofType(updateProfileInfo),
+    ofType(addProfileInfo),
     switchMap( action =>
       this._addUserInfo(
-        {gender: action.gender,
+        {
+          id: action.id,
+          gender: action.gender,
           birthday: action.birthday,
           name: action.name}
       )
@@ -102,7 +102,9 @@ export class ProfileInfoEffects {
   _addUserInfo(data: ProfileInfoRequest){
     return this.profileInfo.addNewInfo(data).
       pipe(
-        map( newInfoValues => profileInfoUpdated()),
+        map( (newInfoValues) => {
+          this.router.navigate(['profile'])
+          return profileInfoAdded()}),
         catchError(e => of(profileInfoFailed))
     )
   }

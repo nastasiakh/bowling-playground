@@ -1,4 +1,6 @@
 <div>
   <app-errors></app-errors>
-  <router-outlet style="position: relative"></router-outlet>
+  <router-outlet style="position: relative">
+  </router-outlet>
+  <app-navbar *ngIf="( showNav | async)"></app-navbar>
 </div>

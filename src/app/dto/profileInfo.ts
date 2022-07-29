@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export interface ProfileInfo extends SignUpCredentials, ProfileInfoRequest{}
 
 export interface LogInCredentials{

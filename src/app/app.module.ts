@@ -29,13 +29,18 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import {ToastMessagesReducer} from "./stores/reducers/errors.reducer";
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-
+import {SignUpInfoGuard} from "./guards/signUpInfo.guard";
+import {MatButtonModule} from "@angular/material/button";
+import { DevPageComponent } from './dev-page/dev-page.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
   {path: 'signin/email', component: SignInEmailComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'signup/info', component: ProfileInfoComponent},
+  {path: 'signup/info', component: ProfileInfoComponent, canActivate: [ SignUpInfoGuard ]},
 
   {path: 'home', component: HomeComponent},
   {path: 'statistics', component: StatisticsComponent},
@@ -43,6 +48,7 @@ const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, },
   {path: 'profile/edit', component: EditProfileComponent, },
 
+  {path: 'devpage', component: DevPageComponent},
   {path: '', component: WelcomeComponent},
   {path: '**', redirectTo: '/'}
 ]
@@ -63,31 +69,37 @@ const appRoutes: Routes = [
     TrainingComponent,
     HomeComponent,
     ErrorsComponent,
+    DevPageComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        EffectsModule.forRoot([AuthEffects]),
-        StoreModule.forRoot({
-            'auth': authReducer,
-            'profileInfo': profileInfoReducer,
-            'errorMessage': ToastMessagesReducer,
-        }),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-            logOnly: environment.production
-        }),
-        [RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({
+      'auth': authReducer,
+      'profileInfo': profileInfoReducer,
+      'errorMessage': ToastMessagesReducer,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    [RouterModule.forRoot(appRoutes)],
 
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        MatSnackBarModule
-    ],
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    MatSnackBarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+
+  ],
   exports: [RouterModule],
-  providers: [],
+  providers: [ SignUpInfoGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

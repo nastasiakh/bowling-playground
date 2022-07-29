@@ -1,4 +1,5 @@
 import {createAction, props} from "@ngrx/store";
+import {Observable} from "rxjs";
 
 export const setGender = createAction('SET_GENDER', props<{gender: string}>())
 export const setGenderSuccessfully = createAction('SET_GENDER_SUCCESSFULLY')
@@ -12,8 +13,8 @@ export const setName = createAction('SET_NAME', props<{name: string}>())
 export const setNameSuccessfully = createAction('SET_NAME_SUCCESSFULLY')
 export const setNameFailed = createAction('SET_NAME_FAILED')
 
-export const updateProfileInfo = createAction('UPDATE_PROFILE', props<{gender: string, birthday: string, name: string}>());
-export const profileInfoUpdated = createAction('PROFILE_UPDATED');
+export const addProfileInfo = createAction('ADD_PROFILE', props<{id: string|undefined, gender: string, birthday: string, name: string}>());
+export const profileInfoAdded = createAction('PROFILE_ADDED');
 export const profileInfoFailed = createAction('PROFILE_UPDATE_FAILED');
 
 export const getProfileInfo = createAction('GOT_PROFILE_iNFO');

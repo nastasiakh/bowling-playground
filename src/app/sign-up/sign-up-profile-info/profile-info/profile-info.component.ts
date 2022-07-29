@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {updateProfileInfo} from "../../../stores/actions/profile-info.actions";
-import {Observable} from "rxjs";
+import {addProfileInfo} from "../../../stores/actions/profile-info.actions";
+import {firstValueFrom, map, Observable, take} from "rxjs";
 import {AppState, currentUserIdSelector} from "../../../stores/selectors/auth.selector";
+import {ofType} from "@ngrx/effects";
+import {signUpWithEmailSuccessfully} from "../../../stores/actions/auth.actions";
 
 @Component({
   selector: 'app-profile-info',
@@ -61,7 +63,6 @@ export class ProfileInfoComponent implements OnInit {
   changeStep(value: number){
     this.step = value
   }
-
   changeClassMale() {
     this.isActiveMale = true;
     this.isActiveFemale = false;
@@ -87,16 +88,16 @@ export class ProfileInfoComponent implements OnInit {
       console.log('некорректна');
     }
   }
-  addProfileInfo() {
+  async addProfileInfo() {
     if (this.genderValue && this.userBirthday && this.userName) {
-      this.store.dispatch(updateProfileInfo(
+      this.store.dispatch(addProfileInfo(
         {
+          id: await firstValueFrom(this.currentUserId$),
           gender: this.genderValue,
           birthday: this.userBirthday,
           name: this.userName
         })
       )
     }
-    this.router.navigate([])
   }
 }

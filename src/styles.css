@@ -84,6 +84,7 @@ table {
   margin: 0 auto;
   overflow: hidden;
   position: relative;
+  padding: 0 15px;
 }
 @media (min-width: 768px ){
   .container{
@@ -94,6 +95,7 @@ table {
     margin: 0 auto;
     width: 450px;
     overflow: hidden;
+    padding: 0 15px;
   }
 }
 a{
@@ -354,7 +356,7 @@ span.bgd-circle-bottom {
   text-align: center;
 }
 .page-wrapper{
-  padding: 280px 15px 205px ;
+  padding: 180px 0 160px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -411,3 +413,6 @@ span.bgd-circle-bottom {
 .wrong{
   background: url("src/assets/images/icon cross.svg") no-repeat center #ffffff;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
