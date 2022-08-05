@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {catchError, map, of, switchMap, } from "rxjs";
+import {catchError, map, mergeMap, of, switchMap, take, tap,} from "rxjs";
 import {Router} from "@angular/router";
 import {ProfileInfoService} from "../../services/profile-info.service";
 import {
@@ -15,7 +15,7 @@ import {
   setGenderFailed,
   setGenderSuccessfully, setName, setNameFailed, setNameSuccessfully,
 } from "../actions/profile-info.actions";
-import {ProfileInfo, ProfileInfoRequest} from "../../dto/profileInfo";
+import {NewUserCreating, ProfileInfo, ProfileInfoRequest} from "../../dto/profileInfo";
 
 @Injectable()
 export class ProfileInfoEffects {
@@ -86,24 +86,28 @@ export class ProfileInfoEffects {
   }
 
   createProfile$ = createEffect(() => this.actions$.pipe(
-    ofType(addProfileInfo),
-    switchMap( action =>
-      this._addUserInfo(
-        {
-          id: action.id,
-          gender: action.gender,
-          birthday: action.birthday,
-          name: action.name}
+        ofType(addProfileInfo),
+        mergeMap( action =>
+          this._addUserInfo(
+            {
+              id: action.id,
+              email: action.email,
+              gender: action.gender,
+              birthday: action.birthday,
+              name: action.name}
+          ).pipe(
+            take(1)
+        )
       )
     )
   )
-  )
 
-  _addUserInfo(data: ProfileInfoRequest){
+  _addUserInfo(data: NewUserCreating){
     return this.profileInfo.addNewInfo(data).
       pipe(
         map( (newInfoValues) => {
-          this.router.navigate(['profile'])
+          console.log(newInfoValues);
+          this.router.navigate(['home'])
           return profileInfoAdded()}),
         catchError(e => of(profileInfoFailed))
     )

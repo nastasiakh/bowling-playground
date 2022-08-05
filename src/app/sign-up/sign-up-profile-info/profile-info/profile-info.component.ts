@@ -3,7 +3,7 @@ import {select, Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {addProfileInfo} from "../../../stores/actions/profile-info.actions";
 import {firstValueFrom, map, Observable, take} from "rxjs";
-import {AppState, currentUserIdSelector} from "../../../stores/selectors/auth.selector";
+import {AppState, currentUserIdSelector, currentUserSelector} from "../../../stores/selectors/auth.selector";
 import {ofType} from "@ngrx/effects";
 import {signUpWithEmailSuccessfully} from "../../../stores/actions/auth.actions";
 
@@ -38,9 +38,11 @@ export class ProfileInfoComponent implements OnInit {
   step: number = 1
 
   currentUserId$: Observable<string|undefined>
+  currentUserEmail$: Observable<string|undefined>
 
   constructor(private router: Router, private store: Store<AppState>) {
     this.currentUserId$ = this.store.pipe(select(currentUserIdSelector))
+    this.currentUserEmail$ = this.store.pipe(select(currentUserSelector))
   }
 
   ngOnInit(): void {
@@ -93,11 +95,13 @@ export class ProfileInfoComponent implements OnInit {
       this.store.dispatch(addProfileInfo(
         {
           id: await firstValueFrom(this.currentUserId$),
+          email: await firstValueFrom(this.currentUserEmail$),
           gender: this.genderValue,
           birthday: this.userBirthday,
           name: this.userName
         })
       )
+      console.log('1')
     }
   }
 }

@@ -1,18 +1,18 @@
 import {createSelector} from "@ngrx/store";
 import {UserStateInterface} from "../reducers/auth.reducers";
-import {ProfileInfoRequest} from "../../dto/profileInfo";
+import {NewUserCreating, ProfileInfoRequest} from "../../dto/profileInfo";
 import {ToastMessagesInterface} from "../../dto/errors";
 
 
 export interface AppState{
   auth: UserStateInterface
-  profileInfo: ProfileInfoRequest
+  profileInfo: NewUserCreating
   errorMessage: ToastMessagesInterface
 }
 
 export const currentUserSelector = createSelector(
   (state: AppState) => state.auth,
-  (state:UserStateInterface) => state.uid
+  (state:UserStateInterface) => state.email
 )
 export const currentUserIdSelector = createSelector(
   (state: AppState) => state.auth,

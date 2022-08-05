@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import { ProfileInfo, ProfileInfoRequest} from "../dto/profileInfo";
+import {NewUserCreating, ProfileInfo} from "../dto/profileInfo";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,12 @@ export class ProfileInfoService {
 
   constructor(private http: HttpClient) { }
 
-  addNewInfo(data: ProfileInfoRequest): Observable<ProfileInfoRequest> {
+  addNewInfo(data: NewUserCreating): Observable<string> {
     return this.http.post(
       this.url,
       data,
       {headers: {'Content-type': 'application/json'}}
-    ).pipe(map(e => e as ProfileInfoRequest))
+    ).pipe(map(e => e as string))
   }
 
   getInfo(): Observable<ProfileInfo> {

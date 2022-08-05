@@ -13,7 +13,7 @@ export const setName = createAction('SET_NAME', props<{name: string}>())
 export const setNameSuccessfully = createAction('SET_NAME_SUCCESSFULLY')
 export const setNameFailed = createAction('SET_NAME_FAILED')
 
-export const addProfileInfo = createAction('ADD_PROFILE', props<{id: string|undefined, gender: string, birthday: string, name: string}>());
+export const addProfileInfo = createAction('ADD_PROFILE', props<{id: string|undefined, email: string|undefined, gender: string, birthday: string, name: string}>());
 export const profileInfoAdded = createAction('PROFILE_ADDED');
 export const profileInfoFailed = createAction('PROFILE_UPDATE_FAILED');
 

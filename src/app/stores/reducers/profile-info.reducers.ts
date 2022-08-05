@@ -1,14 +1,14 @@
 import {createReducer, on} from "@ngrx/store";
 import {
   addProfileInfo,
-  getProfileInfo,
+  getProfileInfo, profileInfoAdded, profileInfoFailed,
   setBirthday,
   setGender,
   setName,
 } from "../actions/profile-info.actions";
-import {ProfileInfoRequest} from "../../dto/profileInfo";
+import {NewUserCreating, ProfileInfoRequest} from "../../dto/profileInfo";
 
-export const initialState: ProfileInfoRequest = {};
+export const initialState: NewUserCreating = {};
 export const profileInfoReducer = createReducer(
   initialState,
   on(setGender, (state, action) => (
@@ -25,6 +25,14 @@ export const profileInfoReducer = createReducer(
   ),
   on(addProfileInfo, (state, action) => (
       {...state, id: action.id, gender: action.gender, birthday: action.birthday, name: action.name}
+    )
+  ),
+  on(profileInfoAdded, (state) => (
+      {...state}
+    )
+  ),
+  on(profileInfoFailed, (state) => (
+      {...state}
     )
   ),
   on(getProfileInfo, (state) => (
