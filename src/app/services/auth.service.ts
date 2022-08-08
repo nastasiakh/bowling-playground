@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LogInCredentials, SignUpCredentials} from "../dto/profileInfo";
-import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
+import {Auth, createUserWithEmailAndPassword, getIdToken, idToken} from "@angular/fire/auth";
 
 
 @Injectable({
@@ -17,6 +17,19 @@ export class AuthService {
   //     {headers: {'Content-type': 'application/json'}}
   //   ).pipe(map(e => e as LogInCredentials))
   // }
+
+  get currentUserId() {
+    return this.auth.currentUser?.uid
+  }
+
+  async accessToken(): Promise<string> {
+    const currentUser = this.auth.currentUser;
+    if (currentUser) {
+      return await getIdToken(currentUser);
+    }
+    throw new UnauthenticatedError();
+  }
+
   async signUp(data: SignUpCredentials): Promise<string>{
     try {
       const newUser = await createUserWithEmailAndPassword(this.auth, data.email, data.password)
@@ -32,5 +45,9 @@ export class AuthService {
 }
 
 export class UserExistedError extends Error{
+
+}
+
+export class UnauthenticatedError extends Error{
 
 }
