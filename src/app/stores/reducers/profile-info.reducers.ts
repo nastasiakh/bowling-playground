@@ -27,8 +27,8 @@ export const profileInfoReducer = createReducer(
       {...state, id: action.id, gender: action.gender, birthday: action.birthday, name: action.name}
     )
   ),
-  on(profileInfoAdded, (state) => (
-      {...state}
+  on(profileInfoAdded, (state, action) => (
+      {...state, result: action.result}
     )
   ),
   on(profileInfoFailed, (state) => (

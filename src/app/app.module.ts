@@ -35,6 +35,9 @@ import { DevPageComponent } from './dev-page/dev-page.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {ProfileInfoEffects} from "./stores/effects/profile-info.effects";
+import {ProfileInfoService} from "./services/profile-info.service";
+import {AuthService} from "./services/auth.service";
 
 const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
@@ -74,7 +77,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProfileInfoEffects]),
     StoreModule.forRoot({
       'auth': authReducer,
       'profileInfo': profileInfoReducer,
@@ -99,7 +102,7 @@ const appRoutes: Routes = [
 
   ],
   exports: [RouterModule],
-  providers: [ SignUpInfoGuard ],
+  providers: [ SignUpInfoGuard, ProfileInfoService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
