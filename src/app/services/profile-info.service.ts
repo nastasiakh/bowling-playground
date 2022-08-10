@@ -3,12 +3,13 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {NewUserCreating, ProfileInfo} from "../dto/profileInfo";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileInfoService {
-  url = environment.baseUrl+'/signup/info'
+  url = '/api/signup/info'
 
   constructor(private http: HttpClient) { }
 

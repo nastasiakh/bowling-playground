@@ -75,7 +75,8 @@
               "browserTarget": "bowling-playground:build:production"
             },
             "development": {
-              "browserTarget": "bowling-playground:build:development"
+              "browserTarget": "bowling-playground:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
