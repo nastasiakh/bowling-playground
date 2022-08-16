@@ -39,6 +39,7 @@ import {ProfileInfoEffects} from "./stores/effects/profile-info.effects";
 import {ProfileInfoService} from "./services/profile-info.service";
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
+import { CombinationChoiceComponent } from './profile/components/combination-choice/combination-choice.component';
 
 const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
@@ -46,9 +47,9 @@ const appRoutes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'signup/info', component: ProfileInfoComponent, canActivate: [SignUpInfoGuard]},
 
-  {path: 'home', component: HomeComponent},
-  {path: 'statistics', component: StatisticsComponent},
-  {path: 'training', component: TrainingComponent},
+  {path: 'profile/home', component: HomeComponent},
+  {path: 'profile/statistics', component: StatisticsComponent},
+  {path: 'profile/training', component: TrainingComponent},
   {path: 'profile', component: ProfileComponent,},
   {path: 'profile/edit', component: EditProfileComponent,},
 
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
     HomeComponent,
     ErrorsComponent,
     DevPageComponent,
+    CombinationChoiceComponent,
   ],
   imports: [
     BrowserModule,

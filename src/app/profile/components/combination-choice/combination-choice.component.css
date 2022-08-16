@@ -1,0 +1,70 @@
+.pin-combo-wrapper{
+  flex-direction: row;
+  width: 300px;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+.pin-combo{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.pin-combo input{
+  display: none;
+}
+.pin-combo label{
+  display: block;
+  width: 44px;
+  padding: 12px 0;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  color: #1F2922;
+}
+.pin-combo label:before{
+  display: block;
+  content: "";
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  background: #ECF2F0;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.pin-combo label.active{
+  color: #FFFFFF;
+}
+.pin-combo label.active:before{
+  background: #6FCF97;
+}
+.pinNumber-1{
+  width: 100%;
+}
+.pinNumber-2, .pinNumber-3{
+  width: 50%;
+}
+.pinNumber-2 label{
+  left: 37px;
+}
+.pinNumber-3 label{
+  right: 37px;
+}
+.pinNumber-4, .pinNumber-5, .pinNumber-6{
+  width: 33%;
+}
+.pinNumber-4 label{
+  left: 25px;
+}
+.pinNumber-6 label{
+  right: 25px;
+}
+.pinNumber-7, .pinNumber-8, .pinNumber-9, .pinNumber-10{
+  width: 25%;
+
+}

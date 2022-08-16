@@ -79,6 +79,7 @@ table {
 .container{
   display: flex;
   justify-content: center;
+  flex-direction: column;
   background: #FFFFFF;
   min-height: 100%;
   margin: 0 auto;

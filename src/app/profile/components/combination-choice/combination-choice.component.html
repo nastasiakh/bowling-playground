@@ -1,0 +1,11 @@
+<div class="container">
+  <span class="bold-18 d-block mb-15">Choose combination: </span>
+  <div class="d-flex pin-combo-wrapper">
+      <div *ngFor="let pin of pinsNumber" class="pin-combo"
+           [class]="'pinNumber-' + pin">
+        <input type="checkbox" [id]="pin" value="true" (click)="addCheckedItem(pin)"
+               #pinInput/>
+        <label [for]="pin" [class]="pinInput.checked ? 'active' : ''">{{pin}}</label>
+      </div>
+  </div>
+</div>
