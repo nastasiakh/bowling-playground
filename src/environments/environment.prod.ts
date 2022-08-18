@@ -8,5 +8,6 @@ export const environment = {
     authDomain: 'first-back-end-21211.firebaseapp.com',
     messagingSenderId: '682699246412',
   },
-  production: true
+  production: true,
+  baseUrl: 'https://us-central1-first-back-end-21211.cloudfunctions.net/api'
 };

@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: '682699246412',
   },
   production: false,
-  baseUrl: 'https://us-central1-first-back-end-21211.cloudfunctions.net/api'
+  baseUrl: '/api'
 };
 
 /*
