@@ -88,7 +88,7 @@ export class ProfileInfoEffects {
     return this.profileInfo.addNewInfo(data).
     pipe(
       map(result => {
-        this.router.navigate(['home'])
+        this.router.navigate(['profile', 'home'])
         return profileInfoAdded({result: result})
       }),
       catchError(e => of(profileInfoFailed))
