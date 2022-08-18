@@ -49,6 +49,7 @@ Thumbs.db
 /launch
 
 # Firebase
-.firebase
+.firebase/
+public/
 *-debug.log
 .runtimeconfig.json
