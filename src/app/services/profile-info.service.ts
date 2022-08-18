@@ -9,7 +9,7 @@ import {AuthService} from "./auth.service";
   providedIn: 'root'
 })
 export class ProfileInfoService {
-  url = '/api/signup/info'
+  private readonly url = `${environment.baseUrl}/signup/info`
 
   constructor(private http: HttpClient) { }
 
