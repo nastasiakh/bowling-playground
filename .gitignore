@@ -53,3 +53,6 @@ Thumbs.db
 public/
 *-debug.log
 .runtimeconfig.json
+
+# Private
+key.txt

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router,NavigationEnd  } from '@angular/router';
 import {filter, map, Observable} from "rxjs";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent{
   showNav: Observable<boolean>;
   pathsWithoutMenu = ['/signin', '/signin/email', '/signup', '/signup/info', '/']
 
-  constructor(private router: Router){
+  constructor(private router: Router, private location: Location){
     this.showNav = this.router.events.pipe(
       filter((end): end is NavigationEnd => end instanceof NavigationEnd),
       map(end => {
@@ -25,4 +26,7 @@ export class AppComponent{
       }));
   }
 
+
+  ngOnInit(): void{
+  }
 }

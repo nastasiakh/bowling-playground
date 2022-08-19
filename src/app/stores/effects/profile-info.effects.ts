@@ -85,9 +85,11 @@ export class ProfileInfoEffects {
     )
   }
   _addUserInfo(data: NewUserCreating){
+    console.log('2')
     return this.profileInfo.addNewInfo(data).
     pipe(
       map(result => {
+        console.log('3')
         this.router.navigate(['profile', 'home'])
         return profileInfoAdded({result: result})
       }),
@@ -97,6 +99,7 @@ export class ProfileInfoEffects {
   createProfile$ = createEffect(() => this.actions$.pipe(
         ofType(addProfileInfo),
         switchMap( action => {
+          console.log('4')
           return this._addUserInfo(
             {
               id: action.id,

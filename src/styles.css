@@ -1,47 +1,3 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-  height: 100%;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
 @font-face{
   font-family: "Mont Semi Bold";
   src: url("/assets/fonts/Mont/Mont-SemiBold.eot");
@@ -81,25 +37,14 @@ table {
   justify-content: center;
   flex-direction: column;
   background: #FFFFFF;
-  min-height: 100%;
+  height: 100vh;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
   padding: 0 15px;
 }
-@media (min-width: 768px ){
-  .container{
-    display: flex;
-    justify-content: center;
-    background: #FFFFFF;
-    min-height: 100%;
-    margin: 0 auto;
-    width: 450px;
-    overflow: hidden;
-    padding: 0 15px;
-  }
-}
-a{
+
+a, a:hover{
   text-decoration: none;
 }
 /*Добавляет свойство дисплей флекс*/
@@ -134,13 +79,14 @@ a{
   box-sizing: border-box;
   border: 1px solid var(--main-element-color);
   border-radius: 8px;
-  padding: 20px 0;
+  padding: 15px 0;
   opacity: 1;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 14px;
 }
-.accept-button:focus-visible{
+.accept-button:focus-visible,
+.accept-button:hover{
   color: var(--secondary-text-color);
   background: #97E8B8;
   border: 1px solid var(--main-element-color);
@@ -165,7 +111,8 @@ a{
   text-align: center;
   position: relative;
 }
-.non-filled-button:focus-visible{
+.non-filled-button:focus-visible,
+.non-filled-button:hover{
   background: var(--third-element-color);
   opacity: 1;
   outline: none;
@@ -180,7 +127,7 @@ a{
   border-radius: 8px;
   font-family: var(--primary-font);
   border: 1px solid var(--secondary-element-color);
-  padding: 20px 16px;
+  padding: 16px;
   background: var(--secondary-element-color);
   opacity: 1;
   color: var(--main-text-color);
@@ -313,6 +260,10 @@ a{
 }
 
 /*Класс для элемента навигации вверху справа*/
+header{
+  padding: 15px;
+  position: absolute;
+}
 .prev-pg-link{
   position: absolute;
   display: flex;
@@ -321,10 +272,9 @@ a{
   content: "";
   width: 14px;
   height: 24px;
-  top: 31px;
-  left: 5px;
   border: none;
   padding: 20px;
+  z-index: 1;
 }
 
 .bgd-circle-top{
@@ -357,7 +307,7 @@ span.bgd-circle-bottom {
   text-align: center;
 }
 .page-wrapper{
-  padding: 180px 0 160px;
+  padding: 140px 0 160px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -417,3 +367,22 @@ span.bgd-circle-bottom {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media (min-width: 576px ){
+  .container{
+    width: 450px;
+    box-sizing: border-box;
+    box-shadow: 0 0 40px #d0d0d0;
+  }
+  .input-style{
+
+  }
+}
+@media (min-width: 768px ){
+  .container{
+    background: #FFFFFF;
+    height: 100vh;
+    margin: 0 auto;
+    width: 450px;
+  }
+}

@@ -40,6 +40,8 @@ import {ProfileInfoService} from "./services/profile-info.service";
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import { CombinationChoiceComponent } from './profile/components/combination-choice/combination-choice.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { FooterComponent } from './layouts/footer/footer.component';
 
 const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
@@ -76,6 +78,8 @@ const appRoutes: Routes = [
     ErrorsComponent,
     DevPageComponent,
     CombinationChoiceComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
