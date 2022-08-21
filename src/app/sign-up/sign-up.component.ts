@@ -1,11 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {select, Store} from "@ngrx/store";
+import {Store} from "@ngrx/store";
 import {FormControl, Validators} from "@angular/forms";
 import {signUpWithEmail} from "../stores/actions/auth.actions";
-import {AppState, currentUserSelector} from "../stores/selectors/auth.selector";
 import {map, Observable} from "rxjs";
-import {UserStateInterface} from "../stores/reducers/auth.reducers";
 
 @Component({
   selector: 'app-sign-up',

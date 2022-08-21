@@ -368,6 +368,34 @@ span.bgd-circle-bottom {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.page{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.select-wrapper{
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+select.input-style{
+  padding: 16px 10px;
+}
+.bdate-content{
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn-content{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
 @media (min-width: 576px ){
   .container{
     width: 450px;

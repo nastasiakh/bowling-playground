@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="">
-    <div id="gender-page" class="w-100" *ngIf="step === 1">
+  <div *ngIf="step === 1">
+    <div class="page w-100" style="padding-top: 15px">
       <h2 class="bold-24 ">What’s your gender?</h2>
       <div class="gender-wrapper">
         <div>
@@ -37,69 +37,77 @@
         <div class="ellipse-grey"></div>
       </div>
       <div class="btn-wrapper">
-        <button  class="w-100 accept-button" (click)="changeStep(2)" [disabled]="!genderValue"
-                >Next
+        <button class="w-100 accept-button" (click)="changeStep(2)" [disabled]="!genderValue"
+        >Next
         </button>
       </div>
     </div>
-    </div>
-    <div *ngIf="step === 2">
-      <div style="margin-bottom: 15px; padding-top: 200px" >
+  </div>
+  <div *ngIf="step === 2">
+    <div class="page">
+      <div class="bdate-content">
         <h2 class="bold-24 mb-60">When is your birthday?</h2>
-        <div class="d-flex mb-60" style="flex-direction: row; justify-content: space-around">
-          <select class="input-style bold-20" style="width: 90px;"
-                  [(ngModel)] = birthDay>
+        <div class="d-flex select-wrapper">
+          <select class="input-style bold-20" style="width: 20%;"
+                  [(ngModel)]=birthDay>
             <option style="color: black; font-size: 14px" [value]="day" ngDefaultControl
                     *ngFor="let day of days">{{day}}</option>
           </select>
 
-          <select class="input-style bold-20" style="width: 140px;"
+          <select class="input-style bold-20" style="width: 40%;"
                   [(ngModel)]="birthMonth">
             <option [value]="i" *ngFor="let month of months; index as i" ngDefaultControl
                     style="color: black; font-size: 14px">{{month}}</option>
           </select>
 
-          <select class="input-style bold-20" style="width: 100px;"
+          <select class="input-style bold-20" style="width: 30%;"
                   [(ngModel)]="birthYear">
             <option *ngFor="let year of yearOptions" style="color: black; font-size: 14px"
                     [value]="year" ngDefaultControl>{{year}}</option>
           </select>
         </div>
-
       </div>
-      <div class="ellipse-wrapper mb-20">
-        <div class="ellipse-grey"></div>
-        <div class="ellipse-black"></div>
-        <div class="ellipse-grey"></div>
-      </div>
-      <div>
+      <div class="btn-content w-100">
+        <div class="ellipse-wrapper">
+          <div class="ellipse-grey"></div>
+          <div class="ellipse-black"></div>
+          <div class="ellipse-grey"></div>
+        </div>
         <p *ngIf="error" style="color: red">The date is incorrect. Check it please and try again.</p>
         <div class="btn-wrapper">
           <button (click)="birthdayInputValidator()"
                   [disabled]="!birthDay || !birthMonth || !birthYear"
-                  class="w-100 accept-button" >Next</button>
+                  class="w-100 accept-button">Next
+          </button>
+          <button (click)="changeStep(1)" class="regular-16"
+                  style="display: block; padding: 16px 10px; border: none">Previous step</button>
         </div>
-
-        <button (click)="changeStep(1)"> Previous step </button>
       </div>
     </div>
-    <div *ngIf="step === 3">
-      <div style="margin-bottom: 15px;padding-top: 200px">
+  </div>
+  <div *ngIf="step === 3">
+    <div class="page">
+      <div class="bdate-content">
         <h2 class="bold-24 mb-60">What is your name?</h2>
         <div class="mb-60">
           <input type="text" id="name" class="input-style bold-20 d-block w-100"
                  style="display:block;" [(ngModel)]="userName"/>
         </div>
       </div>
-      <div class="ellipse-wrapper mb-20">
-        <div class="ellipse-grey"></div>
-        <div class="ellipse-grey"></div>
-        <div class="ellipse-black"></div>
+      <div class="btn-content w-100">
+        <div class="ellipse-wrapper">
+          <div class="ellipse-grey"></div>
+          <div class="ellipse-grey"></div>
+          <div class="ellipse-black"></div>
+        </div>
+        <div class="btn-wrapper">
+          <button (click)="addProfileInfo()" [disabled]="!userName || userName.length == 0"
+                  class="w-100 accept-button" >Next
+          </button>
+          <button (click)="changeStep(2)" class="regular-16"
+                  style="display: block; padding: 16px 10px; border: none">Previous step</button>
+        </div>
       </div>
-      <div class="btn-wrapper">
-        <button (click)="addProfileInfo()" [disabled]="!userName || userName.length == 0"
-                style="display: block; margin-bottom: 15px; width: 150px">Next</button>
-      </div>
-      <button (click)="changeStep(2)"> Previous step </button>
     </div>
   </div>
+</div>
