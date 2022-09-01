@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import {LogInCredentials, SignUpCredentials} from "../dto/profileInfo";
-import {Auth, createUserWithEmailAndPassword, getIdToken, idToken} from "@angular/fire/auth";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  getIdToken,
+  idToken,
+  signInWithEmailAndPassword
+} from "@angular/fire/auth";
 
 
 @Injectable({
@@ -9,14 +15,6 @@ import {Auth, createUserWithEmailAndPassword, getIdToken, idToken} from "@angula
 export class AuthService {
 
   constructor( private auth: Auth) { }
-
-  // signIn(data: LogInCredentials): Observable<LogInCredentials> {
-  //   return this.http.post(
-  //     this.urlLogIn,
-  //     {email: data.email, password: data.password},
-  //     {headers: {'Content-type': 'application/json'}}
-  //   ).pipe(map(e => e as LogInCredentials))
-  // }
 
   get currentUserId() {
     return this.auth.currentUser?.uid
@@ -39,6 +37,15 @@ export class AuthService {
       if(error.code === 'auth/email-already-in-use'){
         throw new UserExistedError()
       }
+      throw error
+    }
+  }
+
+  async signIn(data: LogInCredentials): Promise<string> {
+    try{
+      const existedUser = await signInWithEmailAndPassword(this.auth, data.email, data.password)
+      return existedUser.user.uid
+    } catch (error: any){
       throw error
     }
   }

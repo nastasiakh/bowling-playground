@@ -22,20 +22,36 @@ export class AuthEffects {
     private authService: AuthService
   ) {
   }
-  //
-  // signIn$ = createEffect(() => this.actions$.pipe(
-  //     ofType(logIn),
-  //     switchMap(action =>
-  //       this._doSignIn({email: action.profile.email, password: action.profile.password}))
-  //   )
-  // )
-  // _doSignIn(data: LogInCredentials) {
-  //   return this.authService.signIn(data).pipe(
-  //     map(user => logInSuccessfully()),
-  //
-  //     catchError(e => of(logInFailed()))
-  //   )
-  // }
+
+  signIn$ = createEffect(() => this.actions$.pipe(
+      ofType(logIn),
+      switchMap(action =>
+        this._doSignIn({email: action.profile.email, password: action.profile.password}))
+    )
+  )
+  _doSignIn(data: LogInCredentials) {
+    return from(this.authService.signIn(data))
+      .pipe(
+        map(user => {
+          this.router.navigate(['profile', 'home'])
+          return logInSuccessfully({uid: user})
+        }
+        ),
+        catchError( e => {
+          if (e instanceof UserExistedError) {
+            return of(displayToast(
+                {
+                  title: 'Oops',
+                  errorSolution: 'sign up',
+                  message: "User doesn't existed. Try to sign up instead"
+                }
+              )
+            )
+          }
+          return of(logInFailed())
+        })
+    )
+  }
 
   signUpEmail$ = createEffect(() => this.actions$.pipe(
     ofType(signUpWithEmail),

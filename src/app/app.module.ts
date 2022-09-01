@@ -42,6 +42,7 @@ import {AuthInterceptor} from "./services/auth.interceptor";
 import { CombinationChoiceComponent } from './profile/components/combination-choice/combination-choice.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { TrainingCardComponent } from './profile/training/components/training-card/training-card.component';
 
 const appRoutes: Routes = [
   {path: 'signin', component: SignInComponent},
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
     CombinationChoiceComponent,
     HeaderComponent,
     FooterComponent,
+    TrainingCardComponent,
   ],
   imports: [
     BrowserModule,

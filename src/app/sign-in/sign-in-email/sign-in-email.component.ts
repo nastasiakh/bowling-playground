@@ -10,27 +10,28 @@ import {Router} from "@angular/router";
   templateUrl: './sign-in-email.component.html',
   styleUrls: ['./sign-in-email.component.css']
 })
-export class SignInEmailComponent implements OnInit {
+export class SignInEmailComponent {
 
-  emailField = new FormControl(
-    '',
-    [Validators.required, Validators.email])
-  passwordField = new FormControl(
-    '',
-    [Validators.required, Validators.minLength(6)])
+  emailField = new FormControl('',[Validators.required, Validators.email])
+  passwordField = new FormControl('',[Validators.required, Validators.minLength(6)])
+  shownPassword: boolean = false
 
-
-  constructor(private store: Store, private router: Router) {
+  // waiting$ : Observable<boolean>
+  constructor(private router: Router, private store: Store) {
+    // this.waiting$ = this.store.pipe(map((state:any) => state.auth.waitingSignUp ?? false))
   }
 
-  ngOnInit(): void {
-  }
+  showPassword() {
+    return this.shownPassword = !this.shownPassword
+  };
 
-  logIn(){
-    console.log('email ', this.emailField.value, ' password: ', this.passwordField.value)
-    this.store.dispatch(
-      logIn( {profile: {email: this.emailField.value, password: this.passwordField.value}})
-    )
-    this.router.navigate(['profile'])
+  logInWithEmail(){
+    if(this.emailField.valid){
+      this.store.dispatch(logIn({
+        profile: {
+          email: this.emailField.value,
+          password: this.passwordField.value}
+      }))
+    }
   }
 }

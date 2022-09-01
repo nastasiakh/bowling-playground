@@ -10,7 +10,8 @@
 
         </div>
         <div class="password_input">
-          <input class="w-100 mb-20 input-style" [type]="shownPassword ? 'text': 'password'" [formControl]="passwordField"/>
+          <input class="w-100 mb-20 input-style" [type]="shownPassword ? 'text': 'password'"
+                 [formControl]="passwordField"/>
           <span class="show-pass-icon" [class]="shownPassword ? 'hidden': '' " (click)="showPassword()"></span>
         </div>
 <!--        <p *ngIf="error">Email or password is incorrect. Please, check it and try again.</p>-->
@@ -18,12 +19,12 @@
       <div>
         <button (click)="signUpWithEmail()"
                 [disabled]="emailField.invalid || passwordField.invalid || (waiting$ | async)"
-                class="accept-button w-100" #registrationStart>Create account
+                class="accept-button w-100">Create account
         </button>
 
       </div>
       <footer class="w-100 text-center footer">
-        <span class="bold-14">Already have an account? <span routerLink="/signup" class="bold-14 green-text">Sign In</span></span>
+        <span class="bold-14">Already have an account? <a routerLink="/signin/email" class="bold-14 green-text">Sign In</a></span>
         <div class="pin-bgd">
           <span class="left-pin"></span>
           <span class="right-pin"></span>

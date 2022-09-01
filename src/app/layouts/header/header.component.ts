@@ -9,16 +9,14 @@ import {Location} from "@angular/common";
 })
 export class HeaderComponent implements OnInit {
   history: string[] = [];
-  showBackLink = true;
+  showBackLink = false;
 
   constructor(private router: Router, private location: Location) { }
 
   public startSaveHistory(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd){
-        this.history.push(event.urlAfterRedirects)
-        console.log(this.history)
-        this.showBackLink = true
+        this.showBackLink = event.urlAfterRedirects != '/';
       }
     })
   }

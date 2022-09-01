@@ -1,14 +1,33 @@
 <div class="container">
-  <div>
-    <input type="email" [formControl]="emailField"
-           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
-    <input type="password" [formControl]="passwordField"
-           style="display: block; margin-bottom: 15px; width: 150px; padding: 5px 10px"/>
-  </div>
-  <div>
-    <button style="display: block; margin-bottom: 15px; width: 150px" (click)="logIn()">Log in</button>
-  </div>
-  <div>
-    <button style="display: block; margin-bottom: 15px; width: 150px">Create account</button>
+  <span class="bgd-circle-top"></span>
+  <div class="page-wrapper">
+    <div id="sign-up-page" class="w-100">
+      <h1 class="heading">Sign up</h1>
+      <div class="login">
+        <div class="login_input">
+          <input class="w-100 mb-20 input-style" type="email" [formControl]="emailField"/>
+        </div>
+        <div>
+          <div class="password_input">
+            <input class="w-100 mb-20 input-style" [type]="shownPassword ? 'text': 'password'" [formControl]="passwordField"/>
+            <span class="show-pass-icon" [class]="shownPassword ? 'hidden': '' " (click)="showPassword()"></span>
+          </div>
+        </div>
+        <div>
+          <button (click)="logInWithEmail()"
+                  [disabled]="emailField.invalid || passwordField.invalid"
+                  class="accept-button w-100" #registrationStart>Log in
+          </button>
+
+        </div>
+        <footer class="w-100 text-center footer">
+          <span class="bold-14">Don't have an account? <span routerLink="/signup" class="bold-14 green-text">Sign Up</span></span>
+          <div class="pin-bgd">
+            <span class="left-pin"></span>
+            <span class="right-pin"></span>
+          </div>
+        </footer>
+      </div>
+    </div>
   </div>
 </div>

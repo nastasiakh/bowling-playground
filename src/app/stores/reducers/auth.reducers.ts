@@ -11,13 +11,28 @@ export const initialState: UserStateInterface = {};
 export const authReducer = createReducer(
   initialState,
   on(logIn, (state, action) =>(
-    {...state, email: action.profile.email, password: action.profile.password}
+    {...state,
+      email: action.profile.email,
+      password: action.profile.password,
+      waitingSignUp: true
+    }
     )
   ),
-  on(logInSuccessfully, (state)  =>({...state})),
-  on(logInFailed, (state)  =>({...state})),
+  on(logInSuccessfully, (state, action)  =>(
+    {
+      ...state,
+      uid: action.uid,
+      waitingSignUp: false
+    }
+    )
+  ),
+  on(logInFailed, (state)  =>(
+    {
+      ...state,
+      waitingSignUp: false
+  })),
 
-  on(signUpWithEmail, (state, action) => (
+  on(signUpWithEmail, (state,action ) => (
       {
         ...state,
         email: action.profile.email,
